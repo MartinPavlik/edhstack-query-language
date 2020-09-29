@@ -1,0 +1,12 @@
+{
+  "name": "antlr4-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ChatLexer.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "antlr4": "^4.8.0"
+  }
+}
