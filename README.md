@@ -11,5 +11,5 @@ antlr4 QueryLang.g4
 ```
 
 ```
-node test.js
+node index.js
 ```
