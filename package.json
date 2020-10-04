@@ -6,8 +6,8 @@
   "scripts": {
     "antlr": "antlr4ts -visitor QueryLang.g4",
     "compile": "tsc --project tsconfig.json || true",
-    "build": "yarn antlr && yarn compile,",
-    "test": "yarn antlr && yarn compile && mocha \"dist/**/*.spec.js\""
+    "build": "yarn antlr && yarn compile",
+    "test": "yarn build && mocha \"dist/**/*.spec.js\""
   },
   "author": "Martin Pavlik",
   "license": "ISC",
