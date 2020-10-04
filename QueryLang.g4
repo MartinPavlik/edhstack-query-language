@@ -4,8 +4,6 @@ options {
 	language = JavaScript;
 }
 
-// issue with tokens https://stackoverflow.com/questions/41421644/antlr4-how-to-build-a-grammar-allowed-keywords-as-identifier
-
 /*
  * Parser Rules
  */
@@ -40,15 +38,16 @@ operatorOrder:
 	| operatorLt
 	| operatorLte;
 
-// Just so I can use listener for these rules
 operatorEq: OPERATOR_EQ;
 operatorLt: OPERATOR_LT;
 operatorLte: OPERATOR_LTE;
 operatorGt: OPERATOR_GT;
 operatorGte: OPERATOR_GTE;
 operatorNeq: OPERATOR_NEQ;
+
 numberValue: NUMBER_VALUE;
 colorValue: COLOR_VALUE;
+
 /*
  Imagine query 'color color < rg' where 'color < rg' should be matched as color query 'color' should
  be matched as text query
