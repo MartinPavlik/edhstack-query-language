@@ -1,4 +1,4 @@
-# MTG query language
+# [EdhStack](https://edhstack.com) query language
 
 ## How to install
 
