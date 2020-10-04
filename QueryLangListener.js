@@ -47,12 +47,48 @@ QueryLangListener.prototype.exitNameQuery = function(ctx) {
 };
 
 
+// Enter a parse tree produced by QueryLangParser#powerQuery.
+QueryLangListener.prototype.enterPowerQuery = function(ctx) {
+};
+
+// Exit a parse tree produced by QueryLangParser#powerQuery.
+QueryLangListener.prototype.exitPowerQuery = function(ctx) {
+};
+
+
+// Enter a parse tree produced by QueryLangParser#toughnessQuery.
+QueryLangListener.prototype.enterToughnessQuery = function(ctx) {
+};
+
+// Exit a parse tree produced by QueryLangParser#toughnessQuery.
+QueryLangListener.prototype.exitToughnessQuery = function(ctx) {
+};
+
+
 // Enter a parse tree produced by QueryLangParser#commanderIdentityQuery.
 QueryLangListener.prototype.enterCommanderIdentityQuery = function(ctx) {
 };
 
 // Exit a parse tree produced by QueryLangParser#commanderIdentityQuery.
 QueryLangListener.prototype.exitCommanderIdentityQuery = function(ctx) {
+};
+
+
+// Enter a parse tree produced by QueryLangParser#colorQuery.
+QueryLangListener.prototype.enterColorQuery = function(ctx) {
+};
+
+// Exit a parse tree produced by QueryLangParser#colorQuery.
+QueryLangListener.prototype.exitColorQuery = function(ctx) {
+};
+
+
+// Enter a parse tree produced by QueryLangParser#setQuery.
+QueryLangListener.prototype.enterSetQuery = function(ctx) {
+};
+
+// Exit a parse tree produced by QueryLangParser#setQuery.
+QueryLangListener.prototype.exitSetQuery = function(ctx) {
 };
 
 

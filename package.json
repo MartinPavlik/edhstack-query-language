@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "ChatLexer.js",
-  "scripts": {},
+  "scripts": {
+    "postinstall": "./patch-antlr4.sh"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
