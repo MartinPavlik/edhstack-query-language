@@ -7,7 +7,7 @@ options {
 /*
  * Parser Rules
  */
-wholeQuery: query (WS+ wholeQuery)*;
+wholeQuery: query (WS+ wholeQuery)* EOF;
 query:
 	nameQuery
 	| typeQuery
