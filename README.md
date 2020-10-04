@@ -3,19 +3,15 @@
 ## How to install
 
 ```
-npm i
+yarn install
 ```
 
+## How to run
 ```
-antlr4 -visitor QueryLang.g4
-```
-
-```
-node index.js
+yarn start
 ```
 
 ## Query language syntax
-
 
 ## Next steps
 
@@ -27,7 +23,7 @@ devotionGreen > 3
 
 ### Logic
 
-#### Implicit and
+#### Implicit `and`
 
 There is an implicit `and` between all clauses, so
 ```
@@ -38,7 +34,7 @@ is equal to
 draw and discard and cmc < 3
 ```
 
-### Explicit or
+#### Explicit `or`
 To match one of clauses, you can use `or` operator.
 For example, cards with converted mana cost under 3 or above 5:
 ```
