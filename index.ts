@@ -10,7 +10,7 @@ export const TEXT_QUERY_ID = 'text-query';
 // export const COLOR_QUERY_ID = 'color-query';
 export const NAME_QUERY_ID = 'name-query';
 export const CONVERTED_MANACOST_QUERY_ID = 'converted-manacost-query';
-export const COMMANDER_IDENTITY_QUERY_ID = 'commander-query';
+export const COMMANDER_IDENTITY_QUERY_ID = 'commander-identity-query';
 export const POWER_QUERY_ID = 'power-query';
 export const TOUGHNESS_QUERY_ID = 'toughness-query';
 export const SET_QUERY_ID = 'set-query';
@@ -292,12 +292,15 @@ class Visitor extends AbstractParseTreeVisitor<Result> implements QueryLangVisit
   }
 }
 
-const inputStream = new ANTLRInputStream("t:creature set = znr cmc > 3 pow > 1 tou < 10 cmd < redgreenblue name = \"Niv-Mizzet, the Firemind\" draw discard");
-const lexer = new QueryLangLexer(inputStream);
-const tokenStream = new CommonTokenStream(lexer);
-const parser = new QueryLangParser(tokenStream);
 
-const visitor = new Visitor();
-const tree = parser.wholeQuery();
+export const generateAst = (input: string) => {
+  const inputStream = new ANTLRInputStream(input);
+  const lexer = new QueryLangLexer(inputStream);
+  const tokenStream = new CommonTokenStream(lexer);
+  const parser = new QueryLangParser(tokenStream);
 
-console.log('result\n\n\n', tree.accept(visitor));
+  const visitor = new Visitor();
+  const tree = parser.wholeQuery();
+
+  return tree.accept(visitor);
+}

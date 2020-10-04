@@ -6,9 +6,14 @@
 yarn install
 ```
 
-## How to run
+## How to build
 ```
-yarn start
+yarn build
+```
+
+## How to test
+```
+yarn test
 ```
 
 ## Query language syntax

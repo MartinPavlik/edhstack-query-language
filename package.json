@@ -5,9 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "antlr": "antlr4ts -visitor QueryLang.g4",
-    "compile": "tsc --project tsconfig.json",
-    "start": "node dist/index.js",
-    "dev": "yarn antlr && yarn compile || true && yarn start"
+    "compile": "tsc --project tsconfig.json || true",
+    "build": "yarn antlr && yarn compile,",
+    "test": "yarn compile && mocha \"dist/**/*.spec.js\""
   },
   "author": "Martin Pavlik",
   "license": "ISC",
@@ -15,8 +15,11 @@
     "antlr4ts": "^0.5.0-alpha.3"
   },
   "devDependencies": {
+    "@types/mocha": "^8.0.3",
     "@types/node": "^14.11.2",
     "antlr4ts-cli": "^0.5.0-alpha.3",
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3",
     "typescript": "^4.0.3"
   }
 }
