@@ -25,42 +25,50 @@ export const COLOR_RED = 'R';
 export const COLOR_WHITE = 'W';
 export const COLOR_BLACK = 'B';
 
-type TextValue = {
+export const ALL_COLORS = [
+  COLOR_BLACK,
+  COLOR_BLUE,
+  COLOR_GREEN,
+  COLOR_RED,
+  COLOR_WHITE,
+]
+
+export type TextValue = {
   type: typeof TEXT_VALUE_ID,
   value: string,
   isExact: boolean,
 }
 
-type Colors = (typeof COLOR_GREEN
+export type Colors = (typeof COLOR_GREEN
   | typeof COLOR_RED
   | typeof COLOR_WHITE
   | typeof COLOR_BLACK
   | typeof COLOR_BLUE)[]
 
-type ColorValue = {
+export type ColorValue = {
   type: typeof COLOR_VALUE_ID,
   value: Colors
 }
 
-type NumberValue = {
+export type NumberValue = {
   type: typeof NUMBER_VALUE_ID,
   value: number,
 }
 
-const OPERATOR_EQ = 'EQ';
-const OPERATOR_NEQ = 'NEQ';
-const OPERATOR_LT = 'LT';
-const OPERATOR_LTE = 'LTE';
-const OPERATOR_GT = 'GT';
-const OPERATOR_GTE = 'GTE';
+export const OPERATOR_EQ = 'EQ';
+export const OPERATOR_NEQ = 'NEQ';
+export const OPERATOR_LT = 'LT';
+export const OPERATOR_LTE = 'LTE';
+export const OPERATOR_GT = 'GT';
+export const OPERATOR_GTE = 'GTE';
 
-type EqualityOperator = typeof OPERATOR_EQ | typeof OPERATOR_NEQ;
-type OrderOperator = typeof OPERATOR_GT
+export type EqualityOperator = typeof OPERATOR_EQ | typeof OPERATOR_NEQ;
+export type OrderOperator = typeof OPERATOR_GT
   | typeof OPERATOR_GTE
   | typeof OPERATOR_LT
   | typeof OPERATOR_LTE;
 
-type ComparisonOperator = EqualityOperator | OrderOperator;
+export type ComparisonOperator = EqualityOperator | OrderOperator;
 
 type AstNode<Type, Value = void, Operator = void> = {
   type: Type,
@@ -68,16 +76,16 @@ type AstNode<Type, Value = void, Operator = void> = {
   operator: Operator
 }
 
-type TextQuery = AstNode<typeof TEXT_QUERY_ID, TextValue, EqualityOperator>;
-type CommanderIdentityQuery = AstNode<typeof COMMANDER_IDENTITY_QUERY_ID, ColorValue, ComparisonOperator>;
-type NameQuery = AstNode<typeof NAME_QUERY_ID, TextValue, EqualityOperator>;
-type PowerQuery = AstNode<typeof POWER_QUERY_ID, NumberValue, ComparisonOperator>;
-type ToughnessQuery = AstNode<typeof TOUGHNESS_QUERY_ID, NumberValue, ComparisonOperator>;
-type ConvertedManaCostQuery = AstNode<typeof CONVERTED_MANACOST_QUERY_ID, NumberValue, ComparisonOperator>;
-type SetQuery = AstNode<typeof SET_QUERY_ID, TextValue, EqualityOperator>;
-type TypeQuery = AstNode<typeof TYPE_QUERY_ID, TextValue, EqualityOperator>;
+export type TextQuery = AstNode<typeof TEXT_QUERY_ID, TextValue, EqualityOperator>;
+export type CommanderIdentityQuery = AstNode<typeof COMMANDER_IDENTITY_QUERY_ID, ColorValue, ComparisonOperator>;
+export type NameQuery = AstNode<typeof NAME_QUERY_ID, TextValue, EqualityOperator>;
+export type PowerQuery = AstNode<typeof POWER_QUERY_ID, NumberValue, ComparisonOperator>;
+export type ToughnessQuery = AstNode<typeof TOUGHNESS_QUERY_ID, NumberValue, ComparisonOperator>;
+export type ConvertedManaCostQuery = AstNode<typeof CONVERTED_MANACOST_QUERY_ID, NumberValue, ComparisonOperator>;
+export type SetQuery = AstNode<typeof SET_QUERY_ID, TextValue, EqualityOperator>;
+export type TypeQuery = AstNode<typeof TYPE_QUERY_ID, TextValue, EqualityOperator>;
 
-type Result = (
+export type ResultAstNodes = (
   TextQuery
   | TypeQuery
   | CommanderIdentityQuery
@@ -173,10 +181,10 @@ const visitColorValue = (ctx: ColorValueContext): ColorValue => {
   }
 }
 
-class Visitor extends AbstractParseTreeVisitor<Result> implements QueryLangVisitor<Result>{
-  visitChildren(node: RuleNode): Result {
+class Visitor extends AbstractParseTreeVisitor<ResultAstNodes> implements QueryLangVisitor<ResultAstNodes>{
+  visitChildren(node: RuleNode): ResultAstNodes {
     const n = node.childCount;
-    let result: Result = []
+    let result: ResultAstNodes = []
     for (let i = 0; i < n; i++) {
       const child = node.getChild(i);
       const childResult = child.accept(this);
