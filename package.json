@@ -1,14 +1,22 @@
 {
-  "name": "antlr4-example",
-  "version": "1.0.0",
+  "name": "edhstack-query-lang",
+  "version": "0.1.0",
   "description": "",
-  "main": "ChatLexer.js",
+  "main": "dist/index.js",
   "scripts": {
-    "postinstall": "./patch-antlr4.sh"
+    "antlr": "antlr4ts -visitor QueryLang.g4",
+    "compile": "tsc --project tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "yarn antlr && yarn compile || true && yarn start"
   },
-  "author": "",
+  "author": "Martin Pavlik",
   "license": "ISC",
   "dependencies": {
-    "antlr4": "^4.8.0"
+    "antlr4ts": "^0.5.0-alpha.3"
+  },
+  "devDependencies": {
+    "@types/node": "^14.11.2",
+    "antlr4ts-cli": "^0.5.0-alpha.3",
+    "typescript": "^4.0.3"
   }
 }

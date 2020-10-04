@@ -12,6 +12,7 @@ options {
 wholeQuery: query (WS+ wholeQuery)*;
 query:
 	nameQuery
+	| typeQuery
 	| setQuery
 	| cmcQuery
 	| colorQuery
@@ -19,6 +20,7 @@ query:
 	| powerQuery
 	| toughnessQuery
 	| textQuery;
+typeQuery: TYPE_KEYWORD operatorEquality value;
 cmcQuery: CMC_KEYWORD operatorComparison numberValue;
 nameQuery: NAME_KEYWORD operatorEquality value;
 powerQuery: POWER_KEYWORD operatorComparison numberValue;
@@ -27,7 +29,7 @@ toughnessQuery:
 commanderIdentityQuery:
 	COMMANDER_IDENTITY_KEYWORD operatorComparison colorValue;
 colorQuery: COLOR_KEYWORD operatorComparison colorValue;
-setQuery: (SET_KEYWORD operatorEquality value);
+setQuery: SET_KEYWORD operatorEquality value;
 textQuery: (TEXT_KEYWORD operatorEquality value) | value;
 
 operatorComparison: operatorEquality | operatorOrder;
@@ -64,6 +66,7 @@ colorValue: COLOR_VALUE;
 value:
 	VALUE
 	| QUOTED_VALUE
+	| TYPE_KEYWORD
 	| COLOR_KEYWORD
 	| SET_KEYWORD
 	| NAME_KEYWORD
@@ -76,6 +79,7 @@ value:
 /*
  * Lexer Rules
  */
+TYPE_KEYWORD: T Y P E | T;
 POWER_KEYWORD: P O W E R | P O W;
 TOUGHNESS_KEYWORD: T O U G H N E S S | T O U;
 COLOR_KEYWORD: C O L O R | C O L O U R | C;
@@ -91,11 +95,16 @@ COMMANDER_IDENTITY_KEYWORD:
 	| C O M M A N D E R
 	| C O M M A N D E R WS? I D E N T I T Y;
 NUMBER_VALUE: NUMBER+;
-RED: R | R E D;
-GREEN: G | G R E E N;
-BLUE: U | B L U E;
-WHITE: W | W H I T E;
-BLACK: B | B L A C K;
+RED: R E D | R;
+// RED: R;
+GREEN: G R E E N | G;
+// GREEN: G;
+BLUE: B L U E | U;
+// BLUE: U;
+WHITE: W H I T E | W;
+// WHITE: W;
+BLACK: B L A C K | B;
+// BLACK: B;
 COLOR_VALUE: (RED | GREEN | BLUE | WHITE | BLACK)+;
 OPERATOR_EQ: WS* '=' WS* | WS* ':' WS* | (WS+ E Q WS+);
 OPERATOR_LT: WS* '<' WS* | (WS+ L T WS+);
