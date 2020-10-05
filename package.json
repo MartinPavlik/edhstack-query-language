@@ -11,7 +11,6 @@
     "compile": "tsc --project tsconfig.json || true",
     "build": "yarn antlr && yarn compile",
     "test": "yarn build && mocha \"dist/**/*.spec.js\"",
-    "publish": "echo \"xxx\"",
     "prepublish": "yarn build && cp package.json dist/package.json"
   },
   "author": "Martin Pavlik",
