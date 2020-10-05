@@ -46,7 +46,14 @@ operatorGte: OPERATOR_GTE;
 operatorNeq: OPERATOR_NEQ;
 
 numberValue: NUMBER_VALUE;
-colorValue: COLOR_VALUE;
+
+/*
+ There are some issues with lexer when color value is token COLOR_VALUE or (BLACK | RED | GREEN |
+ BLUE | WHITE)+;
+ 
+ Having 'value' here works for now, but let's fix it later.
+ */
+colorValue: value;
 
 /*
  Imagine query 'color color < rg' where 'color < rg' should be matched as color query 'color' should
@@ -94,23 +101,30 @@ COMMANDER_IDENTITY_KEYWORD:
 	| C O M M A N D E R
 	| C O M M A N D E R WS? I D E N T I T Y;
 NUMBER_VALUE: NUMBER+;
-RED: R E D | R;
-// RED: R;
-GREEN: G R E E N | G;
-// GREEN: G;
-BLUE: B L U E | U;
-// BLUE: U;
-WHITE: W H I T E | W;
-// WHITE: W;
-BLACK: B L A C K | B;
-// BLACK: B;
-COLOR_VALUE: (RED | GREEN | BLUE | WHITE | BLACK)+;
-OPERATOR_EQ: WS* '=' WS* | WS* ':' WS* | (WS+ E Q WS+);
+/*
+ // RED: R E D | R; RED: R; // GREEN: G R E E N | G; GREEN: G; // BLUE: B L U E | U; BLUE: U; //
+ WHITE: W H I T E | W; WHITE: W; // BLACK: B L A C K | B; BLACK: B; COLOR_VALUE: (BLACK | RED |
+ GREEN | BLUE | WHITE)+;
+ */
+OPERATOR_EQ:
+	WS* '=' WS*
+	| WS* ':' WS*
+	| (WS+ E Q WS+)
+	| (WS+ E Q U A L WS+)
+	| (WS+ E Q U A L S WS+)
+	| (WS+ T O WS E Q U A L WS+)
+	| (WS+ T O WS E Q U A L S WS+);
 OPERATOR_LT: WS* '<' WS* | (WS+ L T WS+);
 OPERATOR_LTE: WS* '<=' WS* | (WS+ L T E WS+);
 OPERATOR_GT: WS* '>' WS* | (WS+ G T WS+);
 OPERATOR_GTE: WS* '>=' WS* | (WS+ G T E WS+);
-OPERATOR_NEQ: WS* '!=' WS* | WS* '!:' WS* | (WS+ N E Q WS+);
+OPERATOR_NEQ:
+	WS* '!=' WS*
+	| WS* '!:' WS*
+	| (WS+ N E Q WS+)
+	| (WS+ N O T WS E Q U A L WS+)
+	| (WS+ N O T WS E Q U A L S WS+)
+	| (WS+ T O WS N O T WS E Q U A L WS+);
 WS: (' ' | '\t')+;
 NEWLINE: ('\r'? '\n' | '\r')+;
 VALUE: VAL;

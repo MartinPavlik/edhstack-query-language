@@ -167,7 +167,7 @@ const visitNumberValue = (ctx: NumberValueContext): NumberValue => {
 
 const visitColorValue = (ctx: ColorValueContext): ColorValue => {
   // TODO - refactor this
-  const value = ctx.COLOR_VALUE().text
+  const value = ctx.text
     .toUpperCase()
     .replace('GREEN', 'G')
     .replace('RED', 'R')
@@ -305,8 +305,23 @@ export const generateAst = (input: string) => {
   const inputStream = new ANTLRInputStream(input);
   const lexer = new QueryLangLexer(inputStream);
   const tokenStream = new CommonTokenStream(lexer);
-  const parser = new QueryLangParser(tokenStream);
 
+  /*
+  let i = 1;
+  let current;
+  while (true) {
+    // look ahead
+    current = tokenStream.LA(i)
+    // const token = tokenStream.LT(i)
+    console.log('tokens:', current, QueryLangParser.VOCABULARY.getSymbolicName(current))
+    i++;
+    // -1 => EOF
+    if (current == -1) {
+      break;
+    }
+  }
+  */
+  const parser = new QueryLangParser(tokenStream);
   const visitor = new Visitor();
   const tree = parser.wholeQuery();
 

@@ -38,22 +38,16 @@ export class QueryLangParser extends Parser {
 	public static readonly TEXT_KEYWORD = 8;
 	public static readonly COMMANDER_IDENTITY_KEYWORD = 9;
 	public static readonly NUMBER_VALUE = 10;
-	public static readonly RED = 11;
-	public static readonly GREEN = 12;
-	public static readonly BLUE = 13;
-	public static readonly WHITE = 14;
-	public static readonly BLACK = 15;
-	public static readonly COLOR_VALUE = 16;
-	public static readonly OPERATOR_EQ = 17;
-	public static readonly OPERATOR_LT = 18;
-	public static readonly OPERATOR_LTE = 19;
-	public static readonly OPERATOR_GT = 20;
-	public static readonly OPERATOR_GTE = 21;
-	public static readonly OPERATOR_NEQ = 22;
-	public static readonly WS = 23;
-	public static readonly NEWLINE = 24;
-	public static readonly VALUE = 25;
-	public static readonly QUOTED_VALUE = 26;
+	public static readonly OPERATOR_EQ = 11;
+	public static readonly OPERATOR_LT = 12;
+	public static readonly OPERATOR_LTE = 13;
+	public static readonly OPERATOR_GT = 14;
+	public static readonly OPERATOR_GTE = 15;
+	public static readonly OPERATOR_NEQ = 16;
+	public static readonly WS = 17;
+	public static readonly NEWLINE = 18;
+	public static readonly VALUE = 19;
+	public static readonly QUOTED_VALUE = 20;
 	public static readonly RULE_wholeQuery = 0;
 	public static readonly RULE_query = 1;
 	public static readonly RULE_typeQuery = 2;
@@ -91,9 +85,8 @@ export class QueryLangParser extends Parser {
 	private static readonly _SYMBOLIC_NAMES: Array<string | undefined> = [
 		undefined, "TYPE_KEYWORD", "POWER_KEYWORD", "TOUGHNESS_KEYWORD", "COLOR_KEYWORD", 
 		"SET_KEYWORD", "NAME_KEYWORD", "CMC_KEYWORD", "TEXT_KEYWORD", "COMMANDER_IDENTITY_KEYWORD", 
-		"NUMBER_VALUE", "RED", "GREEN", "BLUE", "WHITE", "BLACK", "COLOR_VALUE", 
-		"OPERATOR_EQ", "OPERATOR_LT", "OPERATOR_LTE", "OPERATOR_GT", "OPERATOR_GTE", 
-		"OPERATOR_NEQ", "WS", "NEWLINE", "VALUE", "QUOTED_VALUE",
+		"NUMBER_VALUE", "OPERATOR_EQ", "OPERATOR_LT", "OPERATOR_LTE", "OPERATOR_GT", 
+		"OPERATOR_GTE", "OPERATOR_NEQ", "WS", "NEWLINE", "VALUE", "QUOTED_VALUE",
 	];
 	public static readonly VOCABULARY: Vocabulary = new VocabularyImpl(QueryLangParser._LITERAL_NAMES, QueryLangParser._SYMBOLIC_NAMES, []);
 
@@ -866,7 +859,7 @@ export class QueryLangParser extends Parser {
 			this.enterOuterAlt(_localctx, 1);
 			{
 			this.state = 138;
-			this.match(QueryLangParser.COLOR_VALUE);
+			this.value();
 			}
 		}
 		catch (re) {
@@ -921,7 +914,7 @@ export class QueryLangParser extends Parser {
 	}
 
 	public static readonly _serializedATN: string =
-		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\x1C\x91\x04\x02" +
+		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\x16\x91\x04\x02" +
 		"\t\x02\x04\x03\t\x03\x04\x04\t\x04\x04\x05\t\x05\x04\x06\t\x06\x04\x07" +
 		"\t\x07\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\v\t\v\x04\f\t\f\x04\r\t\r\x04" +
 		"\x0E\t\x0E\x04\x0F\t\x0F\x04\x10\t\x10\x04\x11\t\x11\x04\x12\t\x12\x04" +
@@ -938,7 +931,7 @@ export class QueryLangParser extends Parser {
 		"\x14\x03\x15\x03\x15\x03\x16\x03\x16\x03\x17\x03\x17\x03\x18\x03\x18\x03" +
 		"\x18\x02\x02\x02\x19\x02\x02\x04\x02\x06\x02\b\x02\n\x02\f\x02\x0E\x02" +
 		"\x10\x02\x12\x02\x14\x02\x16\x02\x18\x02\x1A\x02\x1C\x02\x1E\x02 \x02" +
-		"\"\x02$\x02&\x02(\x02*\x02,\x02.\x02\x02\x03\x04\x02\x03\v\x1B\x1C\x02" +
+		"\"\x02$\x02&\x02(\x02*\x02,\x02.\x02\x02\x03\x04\x02\x03\v\x15\x16\x02" +
 		"\x89\x020\x03\x02\x02\x02\x04G\x03\x02\x02\x02\x06I\x03\x02\x02\x02\b" +
 		"M\x03\x02\x02\x02\nQ\x03\x02\x02\x02\fU\x03\x02\x02\x02\x0EY\x03\x02\x02" +
 		"\x02\x10]\x03\x02\x02\x02\x12a\x03\x02\x02\x02\x14e\x03\x02\x02\x02\x16" +
@@ -946,7 +939,7 @@ export class QueryLangParser extends Parser {
 		"\x02\x02\x1E~\x03\x02\x02\x02 \x80\x03\x02\x02\x02\"\x82\x03\x02\x02\x02" +
 		"$\x84\x03\x02\x02\x02&\x86\x03\x02\x02\x02(\x88\x03\x02\x02\x02*\x8A\x03" +
 		"\x02\x02\x02,\x8C\x03\x02\x02\x02.\x8E\x03\x02\x02\x0209\x05\x04\x03\x02" +
-		"13\x07\x19\x02\x0221\x03\x02\x02\x0234\x03\x02\x02\x0242\x03\x02\x02\x02" +
+		"13\x07\x13\x02\x0221\x03\x02\x02\x0234\x03\x02\x02\x0242\x03\x02\x02\x02" +
 		"45\x03\x02\x02\x0256\x03\x02\x02\x0268\x05\x02\x02\x0272\x03\x02\x02\x02" +
 		"8;\x03\x02\x02\x0297\x03\x02\x02\x029:\x03\x02\x02\x02:<\x03\x02\x02\x02" +
 		";9\x03\x02\x02\x02<=\x07\x02\x02\x03=\x03\x03\x02\x02\x02>H\x05\n\x06" +
@@ -969,13 +962,12 @@ export class QueryLangParser extends Parser {
 		"uw\x05(\x15\x02vt\x03\x02\x02\x02vu\x03\x02\x02\x02w\x1B\x03\x02\x02\x02" +
 		"x}\x05$\x13\x02y}\x05&\x14\x02z}\x05 \x11\x02{}\x05\"\x12\x02|x\x03\x02" +
 		"\x02\x02|y\x03\x02\x02\x02|z\x03\x02\x02\x02|{\x03\x02\x02\x02}\x1D\x03" +
-		"\x02\x02\x02~\x7F\x07\x13\x02\x02\x7F\x1F\x03\x02\x02\x02\x80\x81\x07" +
-		"\x14\x02\x02\x81!\x03\x02\x02\x02\x82\x83\x07\x15\x02\x02\x83#\x03\x02" +
-		"\x02\x02\x84\x85\x07\x16\x02\x02\x85%\x03\x02\x02\x02\x86\x87\x07\x17" +
-		"\x02\x02\x87\'\x03\x02\x02\x02\x88\x89\x07\x18\x02\x02\x89)\x03\x02\x02" +
-		"\x02\x8A\x8B\x07\f\x02\x02\x8B+\x03\x02\x02\x02\x8C\x8D\x07\x12\x02\x02" +
-		"\x8D-\x03\x02\x02\x02\x8E\x8F\t\x02\x02\x02\x8F/\x03\x02\x02\x02\t49G" +
-		"nrv|";
+		"\x02\x02\x02~\x7F\x07\r\x02\x02\x7F\x1F\x03\x02\x02\x02\x80\x81\x07\x0E" +
+		"\x02\x02\x81!\x03\x02\x02\x02\x82\x83\x07\x0F\x02\x02\x83#\x03\x02\x02" +
+		"\x02\x84\x85\x07\x10\x02\x02\x85%\x03\x02\x02\x02\x86\x87\x07\x11\x02" +
+		"\x02\x87\'\x03\x02\x02\x02\x88\x89\x07\x12\x02\x02\x89)\x03\x02\x02\x02" +
+		"\x8A\x8B\x07\f\x02\x02\x8B+\x03\x02\x02\x02\x8C\x8D\x05.\x18\x02\x8D-" +
+		"\x03\x02\x02\x02\x8E\x8F\t\x02\x02\x02\x8F/\x03\x02\x02\x02\t49Gnrv|";
 	public static __ATN: ATN;
 	public static get _ATN(): ATN {
 		if (!QueryLangParser.__ATN) {
@@ -1740,7 +1732,9 @@ export class NumberValueContext extends ParserRuleContext {
 
 
 export class ColorValueContext extends ParserRuleContext {
-	public COLOR_VALUE(): TerminalNode { return this.getToken(QueryLangParser.COLOR_VALUE, 0); }
+	public value(): ValueContext {
+		return this.getRuleContext(0, ValueContext);
+	}
 	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
 		super(parent, invokingState);
 	}
