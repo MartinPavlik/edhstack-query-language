@@ -146,7 +146,7 @@ const visitValue = (ctx: ValueContext): TextValue => {
       type: TEXT_VALUE_ID,
       isExact: true,
       // omit quotes at the beginning and end
-      value: ctx.text.substr(1, ctx.text.length),
+      value: ctx.text.substr(1, ctx.text.length - 2),
     }
   }
 
@@ -306,21 +306,20 @@ export const generateAst = (input: string) => {
   const lexer = new QueryLangLexer(inputStream);
   const tokenStream = new CommonTokenStream(lexer);
 
-  /*
-  let i = 1;
-  let current;
-  while (true) {
-    // look ahead
-    current = tokenStream.LA(i)
-    // const token = tokenStream.LT(i)
-    console.log('tokens:', current, QueryLangParser.VOCABULARY.getSymbolicName(current))
-    i++;
-    // -1 => EOF
-    if (current == -1) {
-      break;
-    }
-  }
-  */
+  // let i = 1;
+  // let current;
+  // console.log('input::', input)
+  // while (true) {
+  //   // look ahead
+  //   current = tokenStream.LA(i)
+  //   // const token = tokenStream.LT(i)
+  //   console.log('tokens:', current, QueryLangParser.VOCABULARY.getSymbolicName(current))
+  //   i++;
+  //   // -1 => EOF
+  //   if (current == -1) {
+  //     break;
+  //   }
+  // }
   const parser = new QueryLangParser(tokenStream);
   const visitor = new Visitor();
   const tree = parser.wholeQuery();

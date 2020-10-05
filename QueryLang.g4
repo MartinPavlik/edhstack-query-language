@@ -128,7 +128,11 @@ OPERATOR_NEQ:
 WS: (' ' | '\t')+;
 NEWLINE: ('\r'? '\n' | '\r')+;
 VALUE: VAL;
-QUOTED_VALUE: QUOTE VAL_SPACE QUOTE;
+QUOTED_VALUE:
+	// double quotes:
+	'"' ~('"')+ '"' |
+	// single quotes
+	'\'' ~('\'')+ '\'';
 
 fragment A: [aA];
 fragment B: [bB];
@@ -158,5 +162,4 @@ fragment Y: [yY];
 fragment Z: [zZ];
 fragment NUMBER: [0-9];
 fragment VAL: [a-zA-Z0-9]+;
-fragment VAL_SPACE: [a-zA-Z0-9\-_, ]+;
-fragment QUOTE: ['"];
+fragment VAL_SPACE: [a-zA-Z0-9/,' _\-]+;

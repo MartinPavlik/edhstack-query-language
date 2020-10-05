@@ -74,6 +74,24 @@ describe('generation of AST', () => {
     ]
     expect(generateAst(input)).to.deep.equal(expected);
   })
+  it('should handle "escaped" values correctly', () => {
+    const input = 'name = "Arguel\'s Blood Fast // Temple of Aclazotz"';
+
+    const expected = [
+      {
+        type: 'name-query',
+        value:
+        {
+          type: 'text-value',
+          isExact: true,
+          value: 'Arguel\'s Blood Fast // Temple of Aclazotz'
+        },
+        operator: 'EQ'
+      },
+    ]
+
+    expect(generateAst(input)).to.deep.equal(expected);
+  })
   it('should work for complex queries', () => {
     const input = "t:creature set = znr cmc > 3 pow > 1 tou < 10 cmd < r name = \"Niv-Mizzet, the Firemind\" draw discard";
     const expected = [
@@ -113,7 +131,7 @@ describe('generation of AST', () => {
         {
           type: 'text-value',
           isExact: true,
-          value: 'Niv-Mizzet, the Firemind"'
+          value: 'Niv-Mizzet, the Firemind'
         },
         operator: 'EQ'
       },
