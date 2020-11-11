@@ -12,6 +12,7 @@ import { PowerQueryContext } from "./QueryLangParser";
 import { ToughnessQueryContext } from "./QueryLangParser";
 import { CommanderIdentityQueryContext } from "./QueryLangParser";
 import { ColorQueryContext } from "./QueryLangParser";
+import { SetNameQueryContext } from "./QueryLangParser";
 import { SetQueryContext } from "./QueryLangParser";
 import { TextQueryContext } from "./QueryLangParser";
 import { OperatorComparisonContext } from "./QueryLangParser";
@@ -98,6 +99,13 @@ export interface QueryLangVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitColorQuery?: (ctx: ColorQueryContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `QueryLangParser.setNameQuery`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSetNameQuery?: (ctx: SetNameQueryContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `QueryLangParser.setQuery`.

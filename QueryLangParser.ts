@@ -32,22 +32,23 @@ export class QueryLangParser extends Parser {
 	public static readonly POWER_KEYWORD = 2;
 	public static readonly TOUGHNESS_KEYWORD = 3;
 	public static readonly COLOR_KEYWORD = 4;
-	public static readonly SET_KEYWORD = 5;
-	public static readonly NAME_KEYWORD = 6;
-	public static readonly CMC_KEYWORD = 7;
-	public static readonly TEXT_KEYWORD = 8;
-	public static readonly COMMANDER_IDENTITY_KEYWORD = 9;
-	public static readonly NUMBER_VALUE = 10;
-	public static readonly OPERATOR_EQ = 11;
-	public static readonly OPERATOR_LT = 12;
-	public static readonly OPERATOR_LTE = 13;
-	public static readonly OPERATOR_GT = 14;
-	public static readonly OPERATOR_GTE = 15;
-	public static readonly OPERATOR_NEQ = 16;
-	public static readonly WS = 17;
-	public static readonly NEWLINE = 18;
-	public static readonly VALUE = 19;
-	public static readonly QUOTED_VALUE = 20;
+	public static readonly SET_NAME_KEYWORD = 5;
+	public static readonly SET_KEYWORD = 6;
+	public static readonly NAME_KEYWORD = 7;
+	public static readonly CMC_KEYWORD = 8;
+	public static readonly TEXT_KEYWORD = 9;
+	public static readonly COMMANDER_IDENTITY_KEYWORD = 10;
+	public static readonly NUMBER_VALUE = 11;
+	public static readonly OPERATOR_EQ = 12;
+	public static readonly OPERATOR_LT = 13;
+	public static readonly OPERATOR_LTE = 14;
+	public static readonly OPERATOR_GT = 15;
+	public static readonly OPERATOR_GTE = 16;
+	public static readonly OPERATOR_NEQ = 17;
+	public static readonly WS = 18;
+	public static readonly NEWLINE = 19;
+	public static readonly VALUE = 20;
+	public static readonly QUOTED_VALUE = 21;
 	public static readonly RULE_wholeQuery = 0;
 	public static readonly RULE_query = 1;
 	public static readonly RULE_typeQuery = 2;
@@ -57,25 +58,26 @@ export class QueryLangParser extends Parser {
 	public static readonly RULE_toughnessQuery = 6;
 	public static readonly RULE_commanderIdentityQuery = 7;
 	public static readonly RULE_colorQuery = 8;
-	public static readonly RULE_setQuery = 9;
-	public static readonly RULE_textQuery = 10;
-	public static readonly RULE_operatorComparison = 11;
-	public static readonly RULE_operatorEquality = 12;
-	public static readonly RULE_operatorOrder = 13;
-	public static readonly RULE_operatorEq = 14;
-	public static readonly RULE_operatorLt = 15;
-	public static readonly RULE_operatorLte = 16;
-	public static readonly RULE_operatorGt = 17;
-	public static readonly RULE_operatorGte = 18;
-	public static readonly RULE_operatorNeq = 19;
-	public static readonly RULE_numberValue = 20;
-	public static readonly RULE_colorValue = 21;
-	public static readonly RULE_value = 22;
+	public static readonly RULE_setNameQuery = 9;
+	public static readonly RULE_setQuery = 10;
+	public static readonly RULE_textQuery = 11;
+	public static readonly RULE_operatorComparison = 12;
+	public static readonly RULE_operatorEquality = 13;
+	public static readonly RULE_operatorOrder = 14;
+	public static readonly RULE_operatorEq = 15;
+	public static readonly RULE_operatorLt = 16;
+	public static readonly RULE_operatorLte = 17;
+	public static readonly RULE_operatorGt = 18;
+	public static readonly RULE_operatorGte = 19;
+	public static readonly RULE_operatorNeq = 20;
+	public static readonly RULE_numberValue = 21;
+	public static readonly RULE_colorValue = 22;
+	public static readonly RULE_value = 23;
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
 		"wholeQuery", "query", "typeQuery", "cmcQuery", "nameQuery", "powerQuery", 
-		"toughnessQuery", "commanderIdentityQuery", "colorQuery", "setQuery", 
-		"textQuery", "operatorComparison", "operatorEquality", "operatorOrder", 
+		"toughnessQuery", "commanderIdentityQuery", "colorQuery", "setNameQuery", 
+		"setQuery", "textQuery", "operatorComparison", "operatorEquality", "operatorOrder", 
 		"operatorEq", "operatorLt", "operatorLte", "operatorGt", "operatorGte", 
 		"operatorNeq", "numberValue", "colorValue", "value",
 	];
@@ -84,9 +86,10 @@ export class QueryLangParser extends Parser {
 	];
 	private static readonly _SYMBOLIC_NAMES: Array<string | undefined> = [
 		undefined, "TYPE_KEYWORD", "POWER_KEYWORD", "TOUGHNESS_KEYWORD", "COLOR_KEYWORD", 
-		"SET_KEYWORD", "NAME_KEYWORD", "CMC_KEYWORD", "TEXT_KEYWORD", "COMMANDER_IDENTITY_KEYWORD", 
-		"NUMBER_VALUE", "OPERATOR_EQ", "OPERATOR_LT", "OPERATOR_LTE", "OPERATOR_GT", 
-		"OPERATOR_GTE", "OPERATOR_NEQ", "WS", "NEWLINE", "VALUE", "QUOTED_VALUE",
+		"SET_NAME_KEYWORD", "SET_KEYWORD", "NAME_KEYWORD", "CMC_KEYWORD", "TEXT_KEYWORD", 
+		"COMMANDER_IDENTITY_KEYWORD", "NUMBER_VALUE", "OPERATOR_EQ", "OPERATOR_LT", 
+		"OPERATOR_LTE", "OPERATOR_GT", "OPERATOR_GTE", "OPERATOR_NEQ", "WS", "NEWLINE", 
+		"VALUE", "QUOTED_VALUE",
 	];
 	public static readonly VOCABULARY: Vocabulary = new VocabularyImpl(QueryLangParser._LITERAL_NAMES, QueryLangParser._SYMBOLIC_NAMES, []);
 
@@ -118,37 +121,37 @@ export class QueryLangParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 46;
+			this.state = 48;
 			this.query();
-			this.state = 55;
+			this.state = 57;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la === QueryLangParser.WS) {
 				{
 				{
-				this.state = 48;
+				this.state = 50;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				do {
 					{
 					{
-					this.state = 47;
+					this.state = 49;
 					this.match(QueryLangParser.WS);
 					}
 					}
-					this.state = 50;
+					this.state = 52;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				} while (_la === QueryLangParser.WS);
-				this.state = 52;
+				this.state = 54;
 				this.wholeQuery();
 				}
 				}
-				this.state = 57;
+				this.state = 59;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 58;
+			this.state = 60;
 			this.match(QueryLangParser.EOF);
 			}
 		}
@@ -171,13 +174,13 @@ export class QueryLangParser extends Parser {
 		let _localctx: QueryContext = new QueryContext(this._ctx, this.state);
 		this.enterRule(_localctx, 2, QueryLangParser.RULE_query);
 		try {
-			this.state = 69;
+			this.state = 72;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 2, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 60;
+				this.state = 62;
 				this.nameQuery();
 				}
 				break;
@@ -185,7 +188,7 @@ export class QueryLangParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 61;
+				this.state = 63;
 				this.typeQuery();
 				}
 				break;
@@ -193,55 +196,63 @@ export class QueryLangParser extends Parser {
 			case 3:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 62;
-				this.setQuery();
+				this.state = 64;
+				this.setNameQuery();
 				}
 				break;
 
 			case 4:
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 63;
-				this.cmcQuery();
+				this.state = 65;
+				this.setQuery();
 				}
 				break;
 
 			case 5:
 				this.enterOuterAlt(_localctx, 5);
 				{
-				this.state = 64;
-				this.colorQuery();
+				this.state = 66;
+				this.cmcQuery();
 				}
 				break;
 
 			case 6:
 				this.enterOuterAlt(_localctx, 6);
 				{
-				this.state = 65;
-				this.commanderIdentityQuery();
+				this.state = 67;
+				this.colorQuery();
 				}
 				break;
 
 			case 7:
 				this.enterOuterAlt(_localctx, 7);
 				{
-				this.state = 66;
-				this.powerQuery();
+				this.state = 68;
+				this.commanderIdentityQuery();
 				}
 				break;
 
 			case 8:
 				this.enterOuterAlt(_localctx, 8);
 				{
-				this.state = 67;
-				this.toughnessQuery();
+				this.state = 69;
+				this.powerQuery();
 				}
 				break;
 
 			case 9:
 				this.enterOuterAlt(_localctx, 9);
 				{
-				this.state = 68;
+				this.state = 70;
+				this.toughnessQuery();
+				}
+				break;
+
+			case 10:
+				this.enterOuterAlt(_localctx, 10);
+				{
+				this.state = 71;
 				this.textQuery();
 				}
 				break;
@@ -268,11 +279,11 @@ export class QueryLangParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 71;
+			this.state = 74;
 			this.match(QueryLangParser.TYPE_KEYWORD);
-			this.state = 72;
+			this.state = 75;
 			this.operatorEquality();
-			this.state = 73;
+			this.state = 76;
 			this.value();
 			}
 		}
@@ -297,11 +308,11 @@ export class QueryLangParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 75;
+			this.state = 78;
 			this.match(QueryLangParser.CMC_KEYWORD);
-			this.state = 76;
+			this.state = 79;
 			this.operatorComparison();
-			this.state = 77;
+			this.state = 80;
 			this.numberValue();
 			}
 		}
@@ -326,11 +337,11 @@ export class QueryLangParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 79;
+			this.state = 82;
 			this.match(QueryLangParser.NAME_KEYWORD);
-			this.state = 80;
+			this.state = 83;
 			this.operatorEquality();
-			this.state = 81;
+			this.state = 84;
 			this.value();
 			}
 		}
@@ -355,11 +366,11 @@ export class QueryLangParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 83;
+			this.state = 86;
 			this.match(QueryLangParser.POWER_KEYWORD);
-			this.state = 84;
+			this.state = 87;
 			this.operatorComparison();
-			this.state = 85;
+			this.state = 88;
 			this.numberValue();
 			}
 		}
@@ -384,11 +395,11 @@ export class QueryLangParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 87;
+			this.state = 90;
 			this.match(QueryLangParser.TOUGHNESS_KEYWORD);
-			this.state = 88;
+			this.state = 91;
 			this.operatorComparison();
-			this.state = 89;
+			this.state = 92;
 			this.numberValue();
 			}
 		}
@@ -413,11 +424,11 @@ export class QueryLangParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 91;
+			this.state = 94;
 			this.match(QueryLangParser.COMMANDER_IDENTITY_KEYWORD);
-			this.state = 92;
+			this.state = 95;
 			this.operatorComparison();
-			this.state = 93;
+			this.state = 96;
 			this.colorValue();
 			}
 		}
@@ -442,12 +453,41 @@ export class QueryLangParser extends Parser {
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 95;
+			this.state = 98;
 			this.match(QueryLangParser.COLOR_KEYWORD);
-			this.state = 96;
+			this.state = 99;
 			this.operatorComparison();
-			this.state = 97;
+			this.state = 100;
 			this.colorValue();
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				_localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return _localctx;
+	}
+	// @RuleVersion(0)
+	public setNameQuery(): SetNameQueryContext {
+		let _localctx: SetNameQueryContext = new SetNameQueryContext(this._ctx, this.state);
+		this.enterRule(_localctx, 18, QueryLangParser.RULE_setNameQuery);
+		try {
+			this.enterOuterAlt(_localctx, 1);
+			{
+			this.state = 102;
+			this.match(QueryLangParser.SET_NAME_KEYWORD);
+			this.state = 103;
+			this.operatorEquality();
+			this.state = 104;
+			this.value();
 			}
 		}
 		catch (re) {
@@ -467,15 +507,15 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public setQuery(): SetQueryContext {
 		let _localctx: SetQueryContext = new SetQueryContext(this._ctx, this.state);
-		this.enterRule(_localctx, 18, QueryLangParser.RULE_setQuery);
+		this.enterRule(_localctx, 20, QueryLangParser.RULE_setQuery);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 99;
+			this.state = 106;
 			this.match(QueryLangParser.SET_KEYWORD);
-			this.state = 100;
+			this.state = 107;
 			this.operatorEquality();
-			this.state = 101;
+			this.state = 108;
 			this.value();
 			}
 		}
@@ -496,20 +536,20 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public textQuery(): TextQueryContext {
 		let _localctx: TextQueryContext = new TextQueryContext(this._ctx, this.state);
-		this.enterRule(_localctx, 20, QueryLangParser.RULE_textQuery);
+		this.enterRule(_localctx, 22, QueryLangParser.RULE_textQuery);
 		try {
-			this.state = 108;
+			this.state = 115;
 			this._errHandler.sync(this);
 			switch ( this.interpreter.adaptivePredict(this._input, 3, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(_localctx, 1);
 				{
 				{
-				this.state = 103;
+				this.state = 110;
 				this.match(QueryLangParser.TEXT_KEYWORD);
-				this.state = 104;
+				this.state = 111;
 				this.operatorEquality();
-				this.state = 105;
+				this.state = 112;
 				this.value();
 				}
 				}
@@ -518,7 +558,7 @@ export class QueryLangParser extends Parser {
 			case 2:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 107;
+				this.state = 114;
 				this.value();
 				}
 				break;
@@ -541,16 +581,16 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public operatorComparison(): OperatorComparisonContext {
 		let _localctx: OperatorComparisonContext = new OperatorComparisonContext(this._ctx, this.state);
-		this.enterRule(_localctx, 22, QueryLangParser.RULE_operatorComparison);
+		this.enterRule(_localctx, 24, QueryLangParser.RULE_operatorComparison);
 		try {
-			this.state = 112;
+			this.state = 119;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case QueryLangParser.OPERATOR_EQ:
 			case QueryLangParser.OPERATOR_NEQ:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 110;
+				this.state = 117;
 				this.operatorEquality();
 				}
 				break;
@@ -560,7 +600,7 @@ export class QueryLangParser extends Parser {
 			case QueryLangParser.OPERATOR_GTE:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 111;
+				this.state = 118;
 				this.operatorOrder();
 				}
 				break;
@@ -585,22 +625,22 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public operatorEquality(): OperatorEqualityContext {
 		let _localctx: OperatorEqualityContext = new OperatorEqualityContext(this._ctx, this.state);
-		this.enterRule(_localctx, 24, QueryLangParser.RULE_operatorEquality);
+		this.enterRule(_localctx, 26, QueryLangParser.RULE_operatorEquality);
 		try {
-			this.state = 116;
+			this.state = 123;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case QueryLangParser.OPERATOR_EQ:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 114;
+				this.state = 121;
 				this.operatorEq();
 				}
 				break;
 			case QueryLangParser.OPERATOR_NEQ:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 115;
+				this.state = 122;
 				this.operatorNeq();
 				}
 				break;
@@ -625,36 +665,36 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public operatorOrder(): OperatorOrderContext {
 		let _localctx: OperatorOrderContext = new OperatorOrderContext(this._ctx, this.state);
-		this.enterRule(_localctx, 26, QueryLangParser.RULE_operatorOrder);
+		this.enterRule(_localctx, 28, QueryLangParser.RULE_operatorOrder);
 		try {
-			this.state = 122;
+			this.state = 129;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case QueryLangParser.OPERATOR_GT:
 				this.enterOuterAlt(_localctx, 1);
 				{
-				this.state = 118;
+				this.state = 125;
 				this.operatorGt();
 				}
 				break;
 			case QueryLangParser.OPERATOR_GTE:
 				this.enterOuterAlt(_localctx, 2);
 				{
-				this.state = 119;
+				this.state = 126;
 				this.operatorGte();
 				}
 				break;
 			case QueryLangParser.OPERATOR_LT:
 				this.enterOuterAlt(_localctx, 3);
 				{
-				this.state = 120;
+				this.state = 127;
 				this.operatorLt();
 				}
 				break;
 			case QueryLangParser.OPERATOR_LTE:
 				this.enterOuterAlt(_localctx, 4);
 				{
-				this.state = 121;
+				this.state = 128;
 				this.operatorLte();
 				}
 				break;
@@ -679,11 +719,11 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public operatorEq(): OperatorEqContext {
 		let _localctx: OperatorEqContext = new OperatorEqContext(this._ctx, this.state);
-		this.enterRule(_localctx, 28, QueryLangParser.RULE_operatorEq);
+		this.enterRule(_localctx, 30, QueryLangParser.RULE_operatorEq);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 124;
+			this.state = 131;
 			this.match(QueryLangParser.OPERATOR_EQ);
 			}
 		}
@@ -704,11 +744,11 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public operatorLt(): OperatorLtContext {
 		let _localctx: OperatorLtContext = new OperatorLtContext(this._ctx, this.state);
-		this.enterRule(_localctx, 30, QueryLangParser.RULE_operatorLt);
+		this.enterRule(_localctx, 32, QueryLangParser.RULE_operatorLt);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 126;
+			this.state = 133;
 			this.match(QueryLangParser.OPERATOR_LT);
 			}
 		}
@@ -729,11 +769,11 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public operatorLte(): OperatorLteContext {
 		let _localctx: OperatorLteContext = new OperatorLteContext(this._ctx, this.state);
-		this.enterRule(_localctx, 32, QueryLangParser.RULE_operatorLte);
+		this.enterRule(_localctx, 34, QueryLangParser.RULE_operatorLte);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 128;
+			this.state = 135;
 			this.match(QueryLangParser.OPERATOR_LTE);
 			}
 		}
@@ -754,11 +794,11 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public operatorGt(): OperatorGtContext {
 		let _localctx: OperatorGtContext = new OperatorGtContext(this._ctx, this.state);
-		this.enterRule(_localctx, 34, QueryLangParser.RULE_operatorGt);
+		this.enterRule(_localctx, 36, QueryLangParser.RULE_operatorGt);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 130;
+			this.state = 137;
 			this.match(QueryLangParser.OPERATOR_GT);
 			}
 		}
@@ -779,11 +819,11 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public operatorGte(): OperatorGteContext {
 		let _localctx: OperatorGteContext = new OperatorGteContext(this._ctx, this.state);
-		this.enterRule(_localctx, 36, QueryLangParser.RULE_operatorGte);
+		this.enterRule(_localctx, 38, QueryLangParser.RULE_operatorGte);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 132;
+			this.state = 139;
 			this.match(QueryLangParser.OPERATOR_GTE);
 			}
 		}
@@ -804,11 +844,11 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public operatorNeq(): OperatorNeqContext {
 		let _localctx: OperatorNeqContext = new OperatorNeqContext(this._ctx, this.state);
-		this.enterRule(_localctx, 38, QueryLangParser.RULE_operatorNeq);
+		this.enterRule(_localctx, 40, QueryLangParser.RULE_operatorNeq);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 134;
+			this.state = 141;
 			this.match(QueryLangParser.OPERATOR_NEQ);
 			}
 		}
@@ -829,11 +869,11 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public numberValue(): NumberValueContext {
 		let _localctx: NumberValueContext = new NumberValueContext(this._ctx, this.state);
-		this.enterRule(_localctx, 40, QueryLangParser.RULE_numberValue);
+		this.enterRule(_localctx, 42, QueryLangParser.RULE_numberValue);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 136;
+			this.state = 143;
 			this.match(QueryLangParser.NUMBER_VALUE);
 			}
 		}
@@ -854,11 +894,11 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public colorValue(): ColorValueContext {
 		let _localctx: ColorValueContext = new ColorValueContext(this._ctx, this.state);
-		this.enterRule(_localctx, 42, QueryLangParser.RULE_colorValue);
+		this.enterRule(_localctx, 44, QueryLangParser.RULE_colorValue);
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 138;
+			this.state = 145;
 			this.value();
 			}
 		}
@@ -879,14 +919,14 @@ export class QueryLangParser extends Parser {
 	// @RuleVersion(0)
 	public value(): ValueContext {
 		let _localctx: ValueContext = new ValueContext(this._ctx, this.state);
-		this.enterRule(_localctx, 44, QueryLangParser.RULE_value);
+		this.enterRule(_localctx, 46, QueryLangParser.RULE_value);
 		let _la: number;
 		try {
 			this.enterOuterAlt(_localctx, 1);
 			{
-			this.state = 140;
+			this.state = 147;
 			_la = this._input.LA(1);
-			if (!((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << QueryLangParser.TYPE_KEYWORD) | (1 << QueryLangParser.POWER_KEYWORD) | (1 << QueryLangParser.TOUGHNESS_KEYWORD) | (1 << QueryLangParser.COLOR_KEYWORD) | (1 << QueryLangParser.SET_KEYWORD) | (1 << QueryLangParser.NAME_KEYWORD) | (1 << QueryLangParser.CMC_KEYWORD) | (1 << QueryLangParser.TEXT_KEYWORD) | (1 << QueryLangParser.COMMANDER_IDENTITY_KEYWORD) | (1 << QueryLangParser.VALUE) | (1 << QueryLangParser.QUOTED_VALUE))) !== 0))) {
+			if (!((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << QueryLangParser.TYPE_KEYWORD) | (1 << QueryLangParser.POWER_KEYWORD) | (1 << QueryLangParser.TOUGHNESS_KEYWORD) | (1 << QueryLangParser.COLOR_KEYWORD) | (1 << QueryLangParser.SET_NAME_KEYWORD) | (1 << QueryLangParser.SET_KEYWORD) | (1 << QueryLangParser.NAME_KEYWORD) | (1 << QueryLangParser.CMC_KEYWORD) | (1 << QueryLangParser.TEXT_KEYWORD) | (1 << QueryLangParser.COMMANDER_IDENTITY_KEYWORD) | (1 << QueryLangParser.VALUE) | (1 << QueryLangParser.QUOTED_VALUE))) !== 0))) {
 			this._errHandler.recoverInline(this);
 			} else {
 				if (this._input.LA(1) === Token.EOF) {
@@ -914,60 +954,64 @@ export class QueryLangParser extends Parser {
 	}
 
 	public static readonly _serializedATN: string =
-		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\x16\x91\x04\x02" +
+		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\x17\x98\x04\x02" +
 		"\t\x02\x04\x03\t\x03\x04\x04\t\x04\x04\x05\t\x05\x04\x06\t\x06\x04\x07" +
 		"\t\x07\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\v\t\v\x04\f\t\f\x04\r\t\r\x04" +
 		"\x0E\t\x0E\x04\x0F\t\x0F\x04\x10\t\x10\x04\x11\t\x11\x04\x12\t\x12\x04" +
 		"\x13\t\x13\x04\x14\t\x14\x04\x15\t\x15\x04\x16\t\x16\x04\x17\t\x17\x04" +
-		"\x18\t\x18\x03\x02\x03\x02\x06\x023\n\x02\r\x02\x0E\x024\x03\x02\x07\x02" +
-		"8\n\x02\f\x02\x0E\x02;\v\x02\x03\x02\x03\x02\x03\x03\x03\x03\x03\x03\x03" +
-		"\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x05\x03H\n\x03\x03\x04\x03" +
-		"\x04\x03\x04\x03\x04\x03\x05\x03\x05\x03\x05\x03\x05\x03\x06\x03\x06\x03" +
-		"\x06\x03\x06\x03\x07\x03\x07\x03\x07\x03\x07\x03\b\x03\b\x03\b\x03\b\x03" +
-		"\t\x03\t\x03\t\x03\t\x03\n\x03\n\x03\n\x03\n\x03\v\x03\v\x03\v\x03\v\x03" +
-		"\f\x03\f\x03\f\x03\f\x03\f\x05\fo\n\f\x03\r\x03\r\x05\rs\n\r\x03\x0E\x03" +
-		"\x0E\x05\x0Ew\n\x0E\x03\x0F\x03\x0F\x03\x0F\x03\x0F\x05\x0F}\n\x0F\x03" +
-		"\x10\x03\x10\x03\x11\x03\x11\x03\x12\x03\x12\x03\x13\x03\x13\x03\x14\x03" +
-		"\x14\x03\x15\x03\x15\x03\x16\x03\x16\x03\x17\x03\x17\x03\x18\x03\x18\x03" +
-		"\x18\x02\x02\x02\x19\x02\x02\x04\x02\x06\x02\b\x02\n\x02\f\x02\x0E\x02" +
-		"\x10\x02\x12\x02\x14\x02\x16\x02\x18\x02\x1A\x02\x1C\x02\x1E\x02 \x02" +
-		"\"\x02$\x02&\x02(\x02*\x02,\x02.\x02\x02\x03\x04\x02\x03\v\x15\x16\x02" +
-		"\x89\x020\x03\x02\x02\x02\x04G\x03\x02\x02\x02\x06I\x03\x02\x02\x02\b" +
-		"M\x03\x02\x02\x02\nQ\x03\x02\x02\x02\fU\x03\x02\x02\x02\x0EY\x03\x02\x02" +
-		"\x02\x10]\x03\x02\x02\x02\x12a\x03\x02\x02\x02\x14e\x03\x02\x02\x02\x16" +
-		"n\x03\x02\x02\x02\x18r\x03\x02\x02\x02\x1Av\x03\x02\x02\x02\x1C|\x03\x02" +
-		"\x02\x02\x1E~\x03\x02\x02\x02 \x80\x03\x02\x02\x02\"\x82\x03\x02\x02\x02" +
-		"$\x84\x03\x02\x02\x02&\x86\x03\x02\x02\x02(\x88\x03\x02\x02\x02*\x8A\x03" +
-		"\x02\x02\x02,\x8C\x03\x02\x02\x02.\x8E\x03\x02\x02\x0209\x05\x04\x03\x02" +
-		"13\x07\x13\x02\x0221\x03\x02\x02\x0234\x03\x02\x02\x0242\x03\x02\x02\x02" +
-		"45\x03\x02\x02\x0256\x03\x02\x02\x0268\x05\x02\x02\x0272\x03\x02\x02\x02" +
-		"8;\x03\x02\x02\x0297\x03\x02\x02\x029:\x03\x02\x02\x02:<\x03\x02\x02\x02" +
-		";9\x03\x02\x02\x02<=\x07\x02\x02\x03=\x03\x03\x02\x02\x02>H\x05\n\x06" +
-		"\x02?H\x05\x06\x04\x02@H\x05\x14\v\x02AH\x05\b\x05\x02BH\x05\x12\n\x02" +
-		"CH\x05\x10\t\x02DH\x05\f\x07\x02EH\x05\x0E\b\x02FH\x05\x16\f\x02G>\x03" +
-		"\x02\x02\x02G?\x03\x02\x02\x02G@\x03\x02\x02\x02GA\x03\x02\x02\x02GB\x03" +
-		"\x02\x02\x02GC\x03\x02\x02\x02GD\x03\x02\x02\x02GE\x03\x02\x02\x02GF\x03" +
-		"\x02\x02\x02H\x05\x03\x02\x02\x02IJ\x07\x03\x02\x02JK\x05\x1A\x0E\x02" +
-		"KL\x05.\x18\x02L\x07\x03\x02\x02\x02MN\x07\t\x02\x02NO\x05\x18\r\x02O" +
-		"P\x05*\x16\x02P\t\x03\x02\x02\x02QR\x07\b\x02\x02RS\x05\x1A\x0E\x02ST" +
-		"\x05.\x18\x02T\v\x03\x02\x02\x02UV\x07\x04\x02\x02VW\x05\x18\r\x02WX\x05" +
-		"*\x16\x02X\r\x03\x02\x02\x02YZ\x07\x05\x02\x02Z[\x05\x18\r\x02[\\\x05" +
-		"*\x16\x02\\\x0F\x03\x02\x02\x02]^\x07\v\x02\x02^_\x05\x18\r\x02_`\x05" +
-		",\x17\x02`\x11\x03\x02\x02\x02ab\x07\x06\x02\x02bc\x05\x18\r\x02cd\x05" +
-		",\x17\x02d\x13\x03\x02\x02\x02ef\x07\x07\x02\x02fg\x05\x1A\x0E\x02gh\x05" +
-		".\x18\x02h\x15\x03\x02\x02\x02ij\x07\n\x02\x02jk\x05\x1A\x0E\x02kl\x05" +
-		".\x18\x02lo\x03\x02\x02\x02mo\x05.\x18\x02ni\x03\x02\x02\x02nm\x03\x02" +
-		"\x02\x02o\x17\x03\x02\x02\x02ps\x05\x1A\x0E\x02qs\x05\x1C\x0F\x02rp\x03" +
-		"\x02\x02\x02rq\x03\x02\x02\x02s\x19\x03\x02\x02\x02tw\x05\x1E\x10\x02" +
-		"uw\x05(\x15\x02vt\x03\x02\x02\x02vu\x03\x02\x02\x02w\x1B\x03\x02\x02\x02" +
-		"x}\x05$\x13\x02y}\x05&\x14\x02z}\x05 \x11\x02{}\x05\"\x12\x02|x\x03\x02" +
-		"\x02\x02|y\x03\x02\x02\x02|z\x03\x02\x02\x02|{\x03\x02\x02\x02}\x1D\x03" +
-		"\x02\x02\x02~\x7F\x07\r\x02\x02\x7F\x1F\x03\x02\x02\x02\x80\x81\x07\x0E" +
-		"\x02\x02\x81!\x03\x02\x02\x02\x82\x83\x07\x0F\x02\x02\x83#\x03\x02\x02" +
-		"\x02\x84\x85\x07\x10\x02\x02\x85%\x03\x02\x02\x02\x86\x87\x07\x11\x02" +
-		"\x02\x87\'\x03\x02\x02\x02\x88\x89\x07\x12\x02\x02\x89)\x03\x02\x02\x02" +
-		"\x8A\x8B\x07\f\x02\x02\x8B+\x03\x02\x02\x02\x8C\x8D\x05.\x18\x02\x8D-" +
-		"\x03\x02\x02\x02\x8E\x8F\t\x02\x02\x02\x8F/\x03\x02\x02\x02\t49Gnrv|";
+		"\x18\t\x18\x04\x19\t\x19\x03\x02\x03\x02\x06\x025\n\x02\r\x02\x0E\x02" +
+		"6\x03\x02\x07\x02:\n\x02\f\x02\x0E\x02=\v\x02\x03\x02\x03\x02\x03\x03" +
+		"\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03\x03" +
+		"\x05\x03K\n\x03\x03\x04\x03\x04\x03\x04\x03\x04\x03\x05\x03\x05\x03\x05" +
+		"\x03\x05\x03\x06\x03\x06\x03\x06\x03\x06\x03\x07\x03\x07\x03\x07\x03\x07" +
+		"\x03\b\x03\b\x03\b\x03\b\x03\t\x03\t\x03\t\x03\t\x03\n\x03\n\x03\n\x03" +
+		"\n\x03\v\x03\v\x03\v\x03\v\x03\f\x03\f\x03\f\x03\f\x03\r\x03\r\x03\r\x03" +
+		"\r\x03\r\x05\rv\n\r\x03\x0E\x03\x0E\x05\x0Ez\n\x0E\x03\x0F\x03\x0F\x05" +
+		"\x0F~\n\x0F\x03\x10\x03\x10\x03\x10\x03\x10\x05\x10\x84\n\x10\x03\x11" +
+		"\x03\x11\x03\x12\x03\x12\x03\x13\x03\x13\x03\x14\x03\x14\x03\x15\x03\x15" +
+		"\x03\x16\x03\x16\x03\x17\x03\x17\x03\x18\x03\x18\x03\x19\x03\x19\x03\x19" +
+		"\x02\x02\x02\x1A\x02\x02\x04\x02\x06\x02\b\x02\n\x02\f\x02\x0E\x02\x10" +
+		"\x02\x12\x02\x14\x02\x16\x02\x18\x02\x1A\x02\x1C\x02\x1E\x02 \x02\"\x02" +
+		"$\x02&\x02(\x02*\x02,\x02.\x020\x02\x02\x03\x04\x02\x03\f\x16\x17\x02" +
+		"\x90\x022\x03\x02\x02\x02\x04J\x03\x02\x02\x02\x06L\x03\x02\x02\x02\b" +
+		"P\x03\x02\x02\x02\nT\x03\x02\x02\x02\fX\x03\x02\x02\x02\x0E\\\x03\x02" +
+		"\x02\x02\x10`\x03\x02\x02\x02\x12d\x03\x02\x02\x02\x14h\x03\x02\x02\x02" +
+		"\x16l\x03\x02\x02\x02\x18u\x03\x02\x02\x02\x1Ay\x03\x02\x02\x02\x1C}\x03" +
+		"\x02\x02\x02\x1E\x83\x03\x02\x02\x02 \x85\x03\x02\x02\x02\"\x87\x03\x02" +
+		"\x02\x02$\x89\x03\x02\x02\x02&\x8B\x03\x02\x02\x02(\x8D\x03\x02\x02\x02" +
+		"*\x8F\x03\x02\x02\x02,\x91\x03\x02\x02\x02.\x93\x03\x02\x02\x020\x95\x03" +
+		"\x02\x02\x022;\x05\x04\x03\x0235\x07\x14\x02\x0243\x03\x02\x02\x0256\x03" +
+		"\x02\x02\x0264\x03\x02\x02\x0267\x03\x02\x02\x0278\x03\x02\x02\x028:\x05" +
+		"\x02\x02\x0294\x03\x02\x02\x02:=\x03\x02\x02\x02;9\x03\x02\x02\x02;<\x03" +
+		"\x02\x02\x02<>\x03\x02\x02\x02=;\x03\x02\x02\x02>?\x07\x02\x02\x03?\x03" +
+		"\x03\x02\x02\x02@K\x05\n\x06\x02AK\x05\x06\x04\x02BK\x05\x14\v\x02CK\x05" +
+		"\x16\f\x02DK\x05\b\x05\x02EK\x05\x12\n\x02FK\x05\x10\t\x02GK\x05\f\x07" +
+		"\x02HK\x05\x0E\b\x02IK\x05\x18\r\x02J@\x03\x02\x02\x02JA\x03\x02\x02\x02" +
+		"JB\x03\x02\x02\x02JC\x03\x02\x02\x02JD\x03\x02\x02\x02JE\x03\x02\x02\x02" +
+		"JF\x03\x02\x02\x02JG\x03\x02\x02\x02JH\x03\x02\x02\x02JI\x03\x02\x02\x02" +
+		"K\x05\x03\x02\x02\x02LM\x07\x03\x02\x02MN\x05\x1C\x0F\x02NO\x050\x19\x02" +
+		"O\x07\x03\x02\x02\x02PQ\x07\n\x02\x02QR\x05\x1A\x0E\x02RS\x05,\x17\x02" +
+		"S\t\x03\x02\x02\x02TU\x07\t\x02\x02UV\x05\x1C\x0F\x02VW\x050\x19\x02W" +
+		"\v\x03\x02\x02\x02XY\x07\x04\x02\x02YZ\x05\x1A\x0E\x02Z[\x05,\x17\x02" +
+		"[\r\x03\x02\x02\x02\\]\x07\x05\x02\x02]^\x05\x1A\x0E\x02^_\x05,\x17\x02" +
+		"_\x0F\x03\x02\x02\x02`a\x07\f\x02\x02ab\x05\x1A\x0E\x02bc\x05.\x18\x02" +
+		"c\x11\x03\x02\x02\x02de\x07\x06\x02\x02ef\x05\x1A\x0E\x02fg\x05.\x18\x02" +
+		"g\x13\x03\x02\x02\x02hi\x07\x07\x02\x02ij\x05\x1C\x0F\x02jk\x050\x19\x02" +
+		"k\x15\x03\x02\x02\x02lm\x07\b\x02\x02mn\x05\x1C\x0F\x02no\x050\x19\x02" +
+		"o\x17\x03\x02\x02\x02pq\x07\v\x02\x02qr\x05\x1C\x0F\x02rs\x050\x19\x02" +
+		"sv\x03\x02\x02\x02tv\x050\x19\x02up\x03\x02\x02\x02ut\x03\x02\x02\x02" +
+		"v\x19\x03\x02\x02\x02wz\x05\x1C\x0F\x02xz\x05\x1E\x10\x02yw\x03\x02\x02" +
+		"\x02yx\x03\x02\x02\x02z\x1B\x03\x02\x02\x02{~\x05 \x11\x02|~\x05*\x16" +
+		"\x02}{\x03\x02\x02\x02}|\x03\x02\x02\x02~\x1D\x03\x02\x02\x02\x7F\x84" +
+		"\x05&\x14\x02\x80\x84\x05(\x15\x02\x81\x84\x05\"\x12\x02\x82\x84\x05$" +
+		"\x13\x02\x83\x7F\x03\x02\x02\x02\x83\x80\x03\x02\x02\x02\x83\x81\x03\x02" +
+		"\x02\x02\x83\x82\x03\x02\x02\x02\x84\x1F\x03\x02\x02\x02\x85\x86\x07\x0E" +
+		"\x02\x02\x86!\x03\x02\x02\x02\x87\x88\x07\x0F\x02\x02\x88#\x03\x02\x02" +
+		"\x02\x89\x8A\x07\x10\x02\x02\x8A%\x03\x02\x02\x02\x8B\x8C\x07\x11\x02" +
+		"\x02\x8C\'\x03\x02\x02\x02\x8D\x8E\x07\x12\x02\x02\x8E)\x03\x02\x02\x02" +
+		"\x8F\x90\x07\x13\x02\x02\x90+\x03\x02\x02\x02\x91\x92\x07\r\x02\x02\x92" +
+		"-\x03\x02\x02\x02\x93\x94\x050\x19\x02\x94/\x03\x02\x02\x02\x95\x96\t" +
+		"\x02\x02\x02\x961\x03\x02\x02\x02\t6;Juy}\x83";
 	public static __ATN: ATN;
 	public static get _ATN(): ATN {
 		if (!QueryLangParser.__ATN) {
@@ -1036,6 +1080,9 @@ export class QueryContext extends ParserRuleContext {
 	}
 	public typeQuery(): TypeQueryContext | undefined {
 		return this.tryGetRuleContext(0, TypeQueryContext);
+	}
+	public setNameQuery(): SetNameQueryContext | undefined {
+		return this.tryGetRuleContext(0, SetNameQueryContext);
 	}
 	public setQuery(): SetQueryContext | undefined {
 		return this.tryGetRuleContext(0, SetQueryContext);
@@ -1331,6 +1378,42 @@ export class ColorQueryContext extends ParserRuleContext {
 	public accept<Result>(visitor: QueryLangVisitor<Result>): Result {
 		if (visitor.visitColorQuery) {
 			return visitor.visitColorQuery(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
+export class SetNameQueryContext extends ParserRuleContext {
+	public SET_NAME_KEYWORD(): TerminalNode { return this.getToken(QueryLangParser.SET_NAME_KEYWORD, 0); }
+	public operatorEquality(): OperatorEqualityContext {
+		return this.getRuleContext(0, OperatorEqualityContext);
+	}
+	public value(): ValueContext {
+		return this.getRuleContext(0, ValueContext);
+	}
+	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+		super(parent, invokingState);
+	}
+	// @Override
+	public get ruleIndex(): number { return QueryLangParser.RULE_setNameQuery; }
+	// @Override
+	public enterRule(listener: QueryLangListener): void {
+		if (listener.enterSetNameQuery) {
+			listener.enterSetNameQuery(this);
+		}
+	}
+	// @Override
+	public exitRule(listener: QueryLangListener): void {
+		if (listener.exitSetNameQuery) {
+			listener.exitSetNameQuery(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: QueryLangVisitor<Result>): Result {
+		if (visitor.visitSetNameQuery) {
+			return visitor.visitSetNameQuery(this);
 		} else {
 			return visitor.visitChildren(this);
 		}
@@ -1768,6 +1851,7 @@ export class ValueContext extends ParserRuleContext {
 	public QUOTED_VALUE(): TerminalNode | undefined { return this.tryGetToken(QueryLangParser.QUOTED_VALUE, 0); }
 	public TYPE_KEYWORD(): TerminalNode | undefined { return this.tryGetToken(QueryLangParser.TYPE_KEYWORD, 0); }
 	public COLOR_KEYWORD(): TerminalNode | undefined { return this.tryGetToken(QueryLangParser.COLOR_KEYWORD, 0); }
+	public SET_NAME_KEYWORD(): TerminalNode | undefined { return this.tryGetToken(QueryLangParser.SET_NAME_KEYWORD, 0); }
 	public SET_KEYWORD(): TerminalNode | undefined { return this.tryGetToken(QueryLangParser.SET_KEYWORD, 0); }
 	public NAME_KEYWORD(): TerminalNode | undefined { return this.tryGetToken(QueryLangParser.NAME_KEYWORD, 0); }
 	public CMC_KEYWORD(): TerminalNode | undefined { return this.tryGetToken(QueryLangParser.CMC_KEYWORD, 0); }

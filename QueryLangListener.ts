@@ -12,6 +12,7 @@ import { PowerQueryContext } from "./QueryLangParser";
 import { ToughnessQueryContext } from "./QueryLangParser";
 import { CommanderIdentityQueryContext } from "./QueryLangParser";
 import { ColorQueryContext } from "./QueryLangParser";
+import { SetNameQueryContext } from "./QueryLangParser";
 import { SetQueryContext } from "./QueryLangParser";
 import { TextQueryContext } from "./QueryLangParser";
 import { OperatorComparisonContext } from "./QueryLangParser";
@@ -131,6 +132,17 @@ export interface QueryLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitColorQuery?: (ctx: ColorQueryContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `QueryLangParser.setNameQuery`.
+	 * @param ctx the parse tree
+	 */
+	enterSetNameQuery?: (ctx: SetNameQueryContext) => void;
+	/**
+	 * Exit a parse tree produced by `QueryLangParser.setNameQuery`.
+	 * @param ctx the parse tree
+	 */
+	exitSetNameQuery?: (ctx: SetNameQueryContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `QueryLangParser.setQuery`.

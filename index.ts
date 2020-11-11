@@ -1,7 +1,8 @@
 import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor'
 import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts';
 import { QueryLangVisitor } from './QueryLangVisitor';
-import { QueryLangParser, WholeQueryContext, TextQueryContext, OperatorEqualityContext, ValueContext, CommanderIdentityQueryContext, OperatorComparisonContext, OperatorOrderContext, ColorValueContext, NameQueryContext, PowerQueryContext, NumberValueContext, ToughnessQueryContext, CmcQueryContext, SetQueryContext, TypeQueryContext } from './QueryLangParser';
+import {
+  QueryLangParser, WholeQueryContext, TextQueryContext, OperatorEqualityContext, ValueContext, CommanderIdentityQueryContext, OperatorComparisonContext, OperatorOrderContext, ColorValueContext, NameQueryContext, PowerQueryContext, NumberValueContext, ToughnessQueryContext, CmcQueryContext, SetQueryContext, SetNameQueryContext, TypeQueryContext } from './QueryLangParser';
 import { QueryLangLexer } from './QueryLangLexer';
 import { TerminalNode } from 'antlr4ts/tree/TerminalNode';
 import { RuleNode } from 'antlr4ts/tree/RuleNode';
@@ -13,6 +14,7 @@ export const CONVERTED_MANACOST_QUERY_ID = 'converted-manacost-query';
 export const COMMANDER_IDENTITY_QUERY_ID = 'commander-identity-query';
 export const POWER_QUERY_ID = 'power-query';
 export const TOUGHNESS_QUERY_ID = 'toughness-query';
+export const SET_NAME_QUERY_ID = 'set-name-query';
 export const SET_QUERY_ID = 'set-query';
 export const TYPE_QUERY_ID = 'type-query';
 export const TEXT_VALUE_ID = 'text-value';
@@ -82,6 +84,7 @@ export type NameQuery = AstNode<typeof NAME_QUERY_ID, TextValue, EqualityOperato
 export type PowerQuery = AstNode<typeof POWER_QUERY_ID, NumberValue, ComparisonOperator>;
 export type ToughnessQuery = AstNode<typeof TOUGHNESS_QUERY_ID, NumberValue, ComparisonOperator>;
 export type ConvertedManaCostQuery = AstNode<typeof CONVERTED_MANACOST_QUERY_ID, NumberValue, ComparisonOperator>;
+export type SetNameQuery = AstNode<typeof SET_NAME_QUERY_ID, TextValue, EqualityOperator>;
 export type SetQuery = AstNode<typeof SET_QUERY_ID, TextValue, EqualityOperator>;
 export type TypeQuery = AstNode<typeof TYPE_QUERY_ID, TextValue, EqualityOperator>;
 
@@ -93,6 +96,7 @@ export type ResultAstNodes = (
   | PowerQuery
   | ToughnessQuery
   | ConvertedManaCostQuery
+  | SetNameQuery
   | SetQuery
 )[]
 
@@ -215,6 +219,16 @@ class Visitor extends AbstractParseTreeVisitor<ResultAstNodes> implements QueryL
 
     return [{
       type: TEXT_QUERY_ID,
+      value,
+      operator,
+    }]
+  }
+
+  visitSetNameQuery(ctx: SetNameQueryContext): SetNameQuery[] {
+    const operator = visitOperatorEquality(ctx.operatorEquality());
+    const value = visitValue(ctx.value());
+    return [{
+      type: SET_NAME_QUERY_ID,
       value,
       operator,
     }]

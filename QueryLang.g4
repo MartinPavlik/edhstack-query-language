@@ -11,6 +11,7 @@ wholeQuery: query (WS+ wholeQuery)* EOF;
 query:
 	nameQuery
 	| typeQuery
+	| setNameQuery
 	| setQuery
 	| cmcQuery
 	| colorQuery
@@ -27,6 +28,7 @@ toughnessQuery:
 commanderIdentityQuery:
 	COMMANDER_IDENTITY_KEYWORD operatorComparison colorValue;
 colorQuery: COLOR_KEYWORD operatorComparison colorValue;
+setNameQuery: SET_NAME_KEYWORD operatorEquality value;
 setQuery: SET_KEYWORD operatorEquality value;
 textQuery: (TEXT_KEYWORD operatorEquality value) | value;
 
@@ -74,6 +76,7 @@ value:
 	| QUOTED_VALUE
 	| TYPE_KEYWORD
 	| COLOR_KEYWORD
+	| SET_NAME_KEYWORD
 	| SET_KEYWORD
 	| NAME_KEYWORD
 	| CMC_KEYWORD
@@ -89,6 +92,7 @@ TYPE_KEYWORD: T Y P E | T;
 POWER_KEYWORD: P O W E R | P O W;
 TOUGHNESS_KEYWORD: T O U G H N E S S | T O U;
 COLOR_KEYWORD: C O L O R | C O L O U R | C;
+SET_NAME_KEYWORD: S E T '_' N A M E;
 SET_KEYWORD: S E T | S;
 NAME_KEYWORD: N A M E | N;
 CMC_KEYWORD:
