@@ -149,7 +149,7 @@ describe('generation of AST', () => {
 
     expect(generateAst(input)).to.deep.equal(expected);
   })
-    it('should work for set name query', () => {
+  it('should work for set name query', () => {
     const input = 'set_name: "Commander 2019"';
 
     const expected = [
@@ -161,5 +161,31 @@ describe('generation of AST', () => {
     ]
 
     expect(generateAst(input)).to.deep.equal(expected);
+  })
+  it('should handle \' correctly', () => {
+    const input = 'commander\'s sphere'
+
+    const expected = [
+      {
+        type: 'text-query',
+        operator: 'EQ',
+        value: {
+          type: 'text-value',
+          value: 'commander\'s',
+          isExact: false,
+        }
+      },
+      {
+        type: 'text-query',
+        operator: 'EQ',
+        value: {
+          type: 'text-value',
+          value: 'sphere',
+          isExact: false,
+        }
+      }
+    ]
+
+    expect(generateAst(input)).to.deep.equal(expected)
   })
 })
