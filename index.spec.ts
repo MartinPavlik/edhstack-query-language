@@ -2,8 +2,6 @@ import { expect } from 'chai';
 import { generateAst, COMMANDER_IDENTITY_QUERY_ID } from './index';
 
 describe('generation of AST', () => {
-  const input = "cmd < red";
-
   const operatorMap = {
     '>=': 'GTE',
     '>': 'GT',
@@ -73,6 +71,52 @@ describe('generation of AST', () => {
       },
     ]
     expect(generateAst(input)).to.deep.equal(expected);
+  })
+  it('should handle similarity query (inexact values)', () => {
+    const expected = [{
+      type: 'similarity-query',
+      value: { type: 'text-value', value: 'Elenda', isExact: false },
+      operator: 'EQ'
+    }]
+    const input = "sim Elenda";
+
+    const equalInputs = [
+      'sim Elenda',
+      'sim = Elenda',
+      'similar Elenda',
+      'similarTo Elenda',
+      'similar = Elenda',
+      'similarTo = Elenda',
+      'similar to = Elenda',
+      'similar to = Elenda',
+    ]
+
+    equalInputs.forEach(input => {
+      expect(generateAst(input)).to.deep.equal(expected);
+    })
+  })
+  it('should handle similarity query (exact values)', () => {
+    const expected = [{
+      type: 'similarity-query',
+      value: { type: 'text-value', value: 'Elenda', isExact: true },
+      operator: 'EQ'
+    }]
+    const input = "sim Elenda";
+
+    const equalInputs = [
+      'sim "Elenda"',
+      'sim = "Elenda"',
+      'similar "Elenda"',
+      'similarTo "Elenda"',
+      'similar = "Elenda"',
+      'similarTo = "Elenda"',
+      'similar to = "Elenda"',
+      'similar to = "Elenda"',
+    ]
+
+    equalInputs.forEach(input => {
+      expect(generateAst(input)).to.deep.equal(expected);
+    })
   })
   it('should handle "escaped" values correctly', () => {
     const input = 'name = "Arguel\'s Blood Fast // Temple of Aclazotz"';
@@ -155,7 +199,7 @@ describe('generation of AST', () => {
     const expected = [
       {
         type: 'set-name-query',
-        value: { type: 'text-value', value: 'Commander 2019', isExact: true},
+        value: { type: 'text-value', value: 'Commander 2019', isExact: true },
         operator: 'EQ'
       },
     ]

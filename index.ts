@@ -2,12 +2,14 @@ import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor
 import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts';
 import { QueryLangVisitor } from './QueryLangVisitor';
 import {
-  QueryLangParser, WholeQueryContext, TextQueryContext, OperatorEqualityContext, ValueContext, CommanderIdentityQueryContext, OperatorComparisonContext, OperatorOrderContext, ColorValueContext, NameQueryContext, PowerQueryContext, NumberValueContext, ToughnessQueryContext, CmcQueryContext, SetQueryContext, SetNameQueryContext, TypeQueryContext } from './QueryLangParser';
+  QueryLangParser, WholeQueryContext, TextQueryContext, OperatorEqualityContext, ValueContext, CommanderIdentityQueryContext, OperatorComparisonContext, OperatorOrderContext, ColorValueContext, NameQueryContext, PowerQueryContext, NumberValueContext, ToughnessQueryContext, CmcQueryContext, SetQueryContext, SetNameQueryContext, TypeQueryContext, SimilarityQueryContext
+} from './QueryLangParser';
 import { QueryLangLexer } from './QueryLangLexer';
 import { TerminalNode } from 'antlr4ts/tree/TerminalNode';
 import { RuleNode } from 'antlr4ts/tree/RuleNode';
 
 export const TEXT_QUERY_ID = 'text-query';
+export const SIMILARITY_QUERY_ID = 'similarity-query';
 // export const COLOR_QUERY_ID = 'color-query';
 export const NAME_QUERY_ID = 'name-query';
 export const CONVERTED_MANACOST_QUERY_ID = 'converted-manacost-query';
@@ -17,6 +19,7 @@ export const TOUGHNESS_QUERY_ID = 'toughness-query';
 export const SET_NAME_QUERY_ID = 'set-name-query';
 export const SET_QUERY_ID = 'set-query';
 export const TYPE_QUERY_ID = 'type-query';
+
 export const TEXT_VALUE_ID = 'text-value';
 export const COLOR_VALUE_ID = 'color-value';
 export const NUMBER_VALUE_ID = 'number-value';
@@ -79,6 +82,7 @@ type AstNode<Type, Value = void, Operator = void> = {
 }
 
 export type TextQuery = AstNode<typeof TEXT_QUERY_ID, TextValue, EqualityOperator>;
+export type SimilarityQuery = AstNode<typeof SIMILARITY_QUERY_ID, TextValue, typeof OPERATOR_EQ>;
 export type CommanderIdentityQuery = AstNode<typeof COMMANDER_IDENTITY_QUERY_ID, ColorValue, ComparisonOperator>;
 export type NameQuery = AstNode<typeof NAME_QUERY_ID, TextValue, EqualityOperator>;
 export type PowerQuery = AstNode<typeof POWER_QUERY_ID, NumberValue, ComparisonOperator>;
@@ -91,6 +95,7 @@ export type TypeQuery = AstNode<typeof TYPE_QUERY_ID, TextValue, EqualityOperato
 export type ResultAstNodes = (
   TextQuery
   | TypeQuery
+  | SimilarityQuery
   | CommanderIdentityQuery
   | NameQuery
   | PowerQuery
@@ -221,6 +226,15 @@ class Visitor extends AbstractParseTreeVisitor<ResultAstNodes> implements QueryL
       type: TEXT_QUERY_ID,
       value,
       operator,
+    }]
+  }
+
+  visitSimilarityQuery(ctx: SimilarityQueryContext): SimilarityQuery[] {
+    const value = visitValue(ctx.value() as ValueContext);
+    return [{
+      type: SIMILARITY_QUERY_ID,
+      value,
+      operator: OPERATOR_EQ,
     }]
   }
 

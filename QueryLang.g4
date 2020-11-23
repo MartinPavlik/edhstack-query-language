@@ -10,6 +10,7 @@ options {
 wholeQuery: query (WS+ wholeQuery)* EOF;
 query:
 	nameQuery
+	| similarityQuery
 	| typeQuery
 	| setNameQuery
 	| setQuery
@@ -19,7 +20,9 @@ query:
 	| powerQuery
 	| toughnessQuery
 	| textQuery;
+
 typeQuery: TYPE_KEYWORD operatorEquality value;
+similarityQuery: SIMILARITY_KEYWORD WS value | SIMILARITY_KEYWORD operatorEq value;
 cmcQuery: CMC_KEYWORD operatorComparison numberValue;
 nameQuery: NAME_KEYWORD operatorEquality value;
 powerQuery: POWER_KEYWORD operatorComparison numberValue;
@@ -83,6 +86,7 @@ value:
 	| TEXT_KEYWORD
 	| POWER_KEYWORD
 	| TOUGHNESS_KEYWORD
+	| SIMILARITY_KEYWORD
 	| COMMANDER_IDENTITY_KEYWORD;
 
 /*
@@ -92,9 +96,10 @@ TYPE_KEYWORD: T Y P E | T;
 POWER_KEYWORD: P O W E R | P O W;
 TOUGHNESS_KEYWORD: T O U G H N E S S | T O U;
 COLOR_KEYWORD: C O L O R | C O L O U R | C;
-SET_NAME_KEYWORD: S E T '_' N A M E;
+SET_NAME_KEYWORD: S E T '_' N A M E | S E T N A M E;
 SET_KEYWORD: S E T | S;
 NAME_KEYWORD: N A M E | N;
+SIMILARITY_KEYWORD: S I M | S I M I L A R WS? T O | S I M I L A R;
 CMC_KEYWORD:
 	C M C
 	| (C O N V E R T E D M A N A C O S T)

@@ -6,6 +6,7 @@ import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
 import { WholeQueryContext } from "./QueryLangParser";
 import { QueryContext } from "./QueryLangParser";
 import { TypeQueryContext } from "./QueryLangParser";
+import { SimilarityQueryContext } from "./QueryLangParser";
 import { CmcQueryContext } from "./QueryLangParser";
 import { NameQueryContext } from "./QueryLangParser";
 import { PowerQueryContext } from "./QueryLangParser";
@@ -66,6 +67,17 @@ export interface QueryLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitTypeQuery?: (ctx: TypeQueryContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `QueryLangParser.similarityQuery`.
+	 * @param ctx the parse tree
+	 */
+	enterSimilarityQuery?: (ctx: SimilarityQueryContext) => void;
+	/**
+	 * Exit a parse tree produced by `QueryLangParser.similarityQuery`.
+	 * @param ctx the parse tree
+	 */
+	exitSimilarityQuery?: (ctx: SimilarityQueryContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `QueryLangParser.cmcQuery`.
