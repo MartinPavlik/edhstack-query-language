@@ -92,8 +92,7 @@ export type SetNameQuery = AstNode<typeof SET_NAME_QUERY_ID, TextValue, Equality
 export type SetQuery = AstNode<typeof SET_QUERY_ID, TextValue, EqualityOperator>;
 export type TypeQuery = AstNode<typeof TYPE_QUERY_ID, TextValue, EqualityOperator>;
 
-export type ResultAstNodes = (
-  TextQuery
+export type ResultAstNode = TextQuery
   | TypeQuery
   | SimilarityQuery
   | CommanderIdentityQuery
@@ -103,7 +102,8 @@ export type ResultAstNodes = (
   | ConvertedManaCostQuery
   | SetNameQuery
   | SetQuery
-)[]
+
+export type ResultAstNodes = ResultAstNode[]
 
 // Helper functions that dont return AstNodes
 
