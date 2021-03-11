@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { generateAst, COMMANDER_IDENTITY_QUERY_ID } from './index';
+import { generateAst, COMMANDER_IDENTITY_QUERY_ID, NUMBER_OF_COMMANDER_IDENTITY_COLORS_QUERY_ID, NUMBER_VALUE_ID, NUMBER_OF_COLORS_QUERY_ID, NUMBER_OF_TYPES_QUERY_ID } from './index';
 
 describe('generation of AST', () => {
   const operatorMap = {
@@ -58,6 +58,42 @@ describe('generation of AST', () => {
       },
     ]
 
+    expect(generateAst(input)).to.deep.equal(expected);
+  })
+  it('should work for number of colors queries', () => {
+    const input = "|color| < 2";
+
+    const expected = [
+      {
+        type: NUMBER_OF_COLORS_QUERY_ID,
+        value: { type: NUMBER_VALUE_ID, value: 2 },
+        operator: 'LT'
+      },
+    ]
+    expect(generateAst(input)).to.deep.equal(expected);
+  })
+  it('should work for number of cmd queries', () => {
+    const input = "|cmd| = 2";
+
+    const expected = [
+      {
+        type: NUMBER_OF_COMMANDER_IDENTITY_COLORS_QUERY_ID,
+        value: { type: NUMBER_VALUE_ID, value: 2 },
+        operator: 'EQ'
+      },
+    ]
+    expect(generateAst(input)).to.deep.equal(expected);
+  })
+  it('should work for number of types queries', () => {
+    const input = "|type| > 2";
+
+    const expected = [
+      {
+        type: NUMBER_OF_TYPES_QUERY_ID,
+        value: { type: NUMBER_VALUE_ID, value: 2 },
+        operator: 'GT'
+      },
+    ]
     expect(generateAst(input)).to.deep.equal(expected);
   })
   it('should work for multiple color query', () => {

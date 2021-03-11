@@ -9,7 +9,8 @@ options {
  */
 wholeQuery: query (WS+ wholeQuery)* EOF;
 query:
-	nameQuery
+	numberOfQuery
+	| nameQuery
 	| similarityQuery
 	| typeQuery
 	| setNameQuery
@@ -20,6 +21,8 @@ query:
 	| powerQuery
 	| toughnessQuery
 	| textQuery;
+
+numberOfQuery: '|' (COMMANDER_IDENTITY_KEYWORD | COLOR_KEYWORD | TYPE_KEYWORD) '|' operatorComparison numberValue;
 
 typeQuery: TYPE_KEYWORD operatorEquality value;
 similarityQuery: SIMILARITY_KEYWORD WS value | SIMILARITY_KEYWORD operatorEq value;

@@ -2,7 +2,7 @@ import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor
 import { ANTLRInputStream, CommonTokenStream } from 'antlr4ts';
 import { QueryLangVisitor } from './QueryLangVisitor';
 import {
-  QueryLangParser, WholeQueryContext, TextQueryContext, OperatorEqualityContext, ValueContext, CommanderIdentityQueryContext, OperatorComparisonContext, OperatorOrderContext, ColorValueContext, NameQueryContext, PowerQueryContext, NumberValueContext, ToughnessQueryContext, CmcQueryContext, SetQueryContext, SetNameQueryContext, TypeQueryContext, SimilarityQueryContext
+  NumberOfQueryContext, QueryLangParser, WholeQueryContext, TextQueryContext, OperatorEqualityContext, ValueContext, CommanderIdentityQueryContext, OperatorComparisonContext, OperatorOrderContext, ColorValueContext, NameQueryContext, PowerQueryContext, NumberValueContext, ToughnessQueryContext, CmcQueryContext, SetQueryContext, SetNameQueryContext, TypeQueryContext, SimilarityQueryContext
 } from './QueryLangParser';
 import { QueryLangLexer } from './QueryLangLexer';
 import { TerminalNode } from 'antlr4ts/tree/TerminalNode';
@@ -19,6 +19,9 @@ export const TOUGHNESS_QUERY_ID = 'toughness-query';
 export const SET_NAME_QUERY_ID = 'set-name-query';
 export const SET_QUERY_ID = 'set-query';
 export const TYPE_QUERY_ID = 'type-query';
+export const NUMBER_OF_COLORS_QUERY_ID = 'num-colors-query';
+export const NUMBER_OF_COMMANDER_IDENTITY_COLORS_QUERY_ID = 'num-commander-identity';
+export const NUMBER_OF_TYPES_QUERY_ID = 'num-types-query';
 
 export const TEXT_VALUE_ID = 'text-value';
 export const COLOR_VALUE_ID = 'color-value';
@@ -91,6 +94,9 @@ export type ConvertedManaCostQuery = AstNode<typeof CONVERTED_MANACOST_QUERY_ID,
 export type SetNameQuery = AstNode<typeof SET_NAME_QUERY_ID, TextValue, EqualityOperator>;
 export type SetQuery = AstNode<typeof SET_QUERY_ID, TextValue, EqualityOperator>;
 export type TypeQuery = AstNode<typeof TYPE_QUERY_ID, TextValue, EqualityOperator>;
+export type NumberOfColorsQuery = AstNode<typeof NUMBER_OF_COLORS_QUERY_ID, NumberValue, ComparisonOperator>;
+export type NumberOfCommanderIdentityColorsQuery = AstNode<typeof NUMBER_OF_COMMANDER_IDENTITY_COLORS_QUERY_ID, NumberValue, ComparisonOperator>;
+export type NumberOfTypesQuery = AstNode<typeof NUMBER_OF_TYPES_QUERY_ID, NumberValue, ComparisonOperator>;
 
 export type ResultAstNode = TextQuery
   | TypeQuery
@@ -102,6 +108,9 @@ export type ResultAstNode = TextQuery
   | ConvertedManaCostQuery
   | SetNameQuery
   | SetQuery
+  | NumberOfColorsQuery
+  | NumberOfCommanderIdentityColorsQuery
+  | NumberOfTypesQuery
 
 export type ResultAstNodes = ResultAstNode[]
 
@@ -204,6 +213,30 @@ class Visitor extends AbstractParseTreeVisitor<ResultAstNodes> implements QueryL
 
   defaultResult() {
     return []
+  }
+
+  visitNumberOfQuery(ctx: NumberOfQueryContext): Array<NumberOfColorsQuery | NumberOfCommanderIdentityColorsQuery | NumberOfTypesQuery> {
+    const operator = visitOperatorComparison(ctx.operatorComparison());
+    const value = visitNumberValue(ctx.numberValue());
+
+    const queryTypeByKeyword = {
+      [NUMBER_OF_COLORS_QUERY_ID]: ctx.COLOR_KEYWORD(),
+      [NUMBER_OF_COMMANDER_IDENTITY_COLORS_QUERY_ID]: ctx.COMMANDER_IDENTITY_KEYWORD(),
+      [NUMBER_OF_TYPES_QUERY_ID]: ctx.TYPE_KEYWORD(),
+    }
+
+    const queryType = Object
+      .entries(queryTypeByKeyword)
+      .filter(([_, v]) => v)
+      .map(([key]) => key)[0] as any
+
+    if (!queryType) return []
+
+    return [{
+      type: queryType,
+      value,
+      operator,
+    }]
   }
 
   visitTextQuery(ctx: TextQueryContext): TextQuery[] {

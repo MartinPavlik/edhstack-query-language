@@ -5,6 +5,7 @@ import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
 
 import { WholeQueryContext } from "./QueryLangParser";
 import { QueryContext } from "./QueryLangParser";
+import { NumberOfQueryContext } from "./QueryLangParser";
 import { TypeQueryContext } from "./QueryLangParser";
 import { SimilarityQueryContext } from "./QueryLangParser";
 import { CmcQueryContext } from "./QueryLangParser";
@@ -56,6 +57,17 @@ export interface QueryLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitQuery?: (ctx: QueryContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `QueryLangParser.numberOfQuery`.
+	 * @param ctx the parse tree
+	 */
+	enterNumberOfQuery?: (ctx: NumberOfQueryContext) => void;
+	/**
+	 * Exit a parse tree produced by `QueryLangParser.numberOfQuery`.
+	 * @param ctx the parse tree
+	 */
+	exitNumberOfQuery?: (ctx: NumberOfQueryContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `QueryLangParser.typeQuery`.

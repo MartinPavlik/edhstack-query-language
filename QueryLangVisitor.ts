@@ -5,6 +5,7 @@ import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
 
 import { WholeQueryContext } from "./QueryLangParser";
 import { QueryContext } from "./QueryLangParser";
+import { NumberOfQueryContext } from "./QueryLangParser";
 import { TypeQueryContext } from "./QueryLangParser";
 import { SimilarityQueryContext } from "./QueryLangParser";
 import { CmcQueryContext } from "./QueryLangParser";
@@ -51,6 +52,13 @@ export interface QueryLangVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitQuery?: (ctx: QueryContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `QueryLangParser.numberOfQuery`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitNumberOfQuery?: (ctx: NumberOfQueryContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `QueryLangParser.typeQuery`.
