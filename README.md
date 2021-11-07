@@ -2,6 +2,11 @@
 
 ## How to install
 
+You need java version in order to run antlr4, so if `java --version` is not a command, try:
+```
+sudo apt install default-jre
+```
+
 ```
 yarn install
 ```
